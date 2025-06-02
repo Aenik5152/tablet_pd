@@ -1,61 +1,75 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tablet Policyjny</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #0b0f1a;
-      color: #fff;
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0a0e1a;
+      color: white;
+    }
+
     header {
-      background-color: #1c1f2a;
+      background-color: #1a1f2e;
       padding: 20px;
       text-align: center;
-      border-bottom: 2px solid #0074d9;
+      border-bottom: 3px solid #0078d4;
     }
+
     h1 {
-      margin: 0;
       font-size: 28px;
     }
+
     nav {
       display: flex;
-      background-color: #141820;
-      padding: 10px;
       justify-content: center;
+      background-color: #121620;
+      padding: 10px;
       gap: 20px;
     }
+
     nav a {
-      color: #00bfff;
+      color: #4fc3f7;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.2s;
     }
+
     nav a:hover {
-      text-decoration: underline;
+      color: #81d4fa;
     }
+
     .content {
       padding: 20px;
+      max-width: 900px;
+      margin: auto;
     }
+
     .card {
-      background-color: #1e2233;
+      background-color: #1d2233;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
       margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
     }
+
     .label {
-      color: #00bfff;
+      color: #03a9f4;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>System Tablet Policyjny</h1>
+    <h1>🛡️ Tablet Policyjny</h1>
   </header>
 
   <nav>
@@ -77,9 +91,10 @@
     <div class="card">
       <p><span class="label">Zgłoszenie #001</span></p>
       <p><span class="label">Data:</span> 2025-06-02</p>
-      <p><span class="label">Opis:</span> Zgłoszenie hałasu na ul. Długa 12.</p>
+      <p><span class="label">Opis:</span> Zgłoszenie hałasu na ul. Długa 12</p>
       <p><span class="label">Status:</span> W trakcie</p>
     </div>
   </div>
 </body>
 </html>
+
