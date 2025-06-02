@@ -2,84 +2,224 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tablet Policyjny</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #0b0f1a;
-      color: #fff;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0a0f1a;
+      color: white;
     }
     header {
-      background-color: #1c1f2a;
+      background-color: #1e2b44;
       padding: 20px;
       text-align: center;
-      border-bottom: 2px solid #0074d9;
-    }
-    h1 {
-      margin: 0;
-      font-size: 28px;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 2px solid #00aaff;
     }
     nav {
       display: flex;
-      background-color: #141820;
-      padding: 10px;
-      justify-content: center;
-      gap: 20px;
+      justify-content: space-around;
+      background-color: #141d2b;
+      padding: 10px 0;
+      border-bottom: 1px solid #00aaff;
     }
-    nav a {
-      color: #00bfff;
-      text-decoration: none;
-      font-weight: bold;
+    nav button {
+      background-color: transparent;
+      border: none;
+      color: #00aaff;
+      font-size: 16px;
+      cursor: pointer;
     }
-    nav a:hover {
+    nav button:hover {
       text-decoration: underline;
     }
-    .content {
+    main {
       padding: 20px;
     }
     .card {
-      background-color: #1e2233;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      background-color: #1c2433;
+      border-radius: 8px;
+      padding: 15px;
       margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
+    }
+    .card h2 {
+      margin-top: 0;
+      color: #00aaff;
     }
     .label {
-      color: #00bfff;
+      color: #8ab4f8;
       font-weight: bold;
+    }
+    .value {
+      margin-bottom: 10px;
+    }
+    input, textarea, button {
+      display: block;
+      margin-top: 8px;
+      padding: 8px;
+      width: 100%;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 15px;
+    }
+    button {
+      background-color: #00aaff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #008fcc;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>System Tablet Policyjny</h1>
-  </header>
+  <header>Tablet Policyjny - System Operacyjny</header>
 
   <nav>
-    <a href="#">Wyszukaj obywatela</a>
-    <a href="#">Zgłoszenia</a>
-    <a href="#">Baza danych</a>
-    <a href="#">Mandaty</a>
-    <a href="#">Wyloguj</a>
+    <button onclick="showSection('citizens')">Obywatele</button>
+    <button onclick="showSection('reports')">Zgłoszenia</button>
+    <button onclick="showSection('fines')">Mandaty</button>
+    <button onclick="showSection('logout')">Wyloguj</button>
   </nav>
 
-  <div class="content">
-    <div class="card">
-      <p><span class="label">Imię i nazwisko:</span> Jan Kowalski</p>
-      <p><span class="label">PESEL:</span> 12345678901</p>
-      <p><span class="label">Wiek:</span> 34</p>
-      <p><span class="label">Wykroczenia:</span> Brak</p>
-    </div>
+  <main>
+    <section id="citizens" class="section">
+      <div class="card">
+        <h2>Dodaj Obywatela</h2>
+        <form onsubmit="addCitizen(event)">
+          <input type="text" id="name" placeholder="Imię i Nazwisko" required>
+          <input type="text" id="pesel" placeholder="PESEL" required>
+          <input type="text" id="address" placeholder="Adres" required>
+          <input type="text" id="criminal" placeholder="Rejestr Karalności">
+          <button type="submit">Zapisz</button>
+        </form>
+      </div>
+      <div id="citizenList"></div>
+    </section>
 
-    <div class="card">
-      <p><span class="label">Zgłoszenie #001</span></p>
-      <p><span class="label">Data:</span> 2025-06-02</p>
-      <p><span class="label">Opis:</span> Zgłoszenie hałasu na ul. Długa 12.</p>
-      <p><span class="label">Status:</span> W trakcie</p>
-    </div>
-  </div>
+    <section id="reports" class="section" style="display:none">
+      <div class="card">
+        <h2>Dodaj Zgłoszenie</h2>
+        <form onsubmit="addReport(event)">
+          <input type="text" id="reportDesc" placeholder="Opis zgłoszenia" required>
+          <button type="submit">Dodaj</button>
+        </form>
+      </div>
+      <div id="reportsList"></div>
+    </section>
+
+    <section id="fines" class="section" style="display:none">
+      <div class="card">
+        <h2>Dodaj Mandat</h2>
+        <form onsubmit="addFine(event)">
+          <input type="text" id="fineDesc" placeholder="Opis wykroczenia" required>
+          <input type="number" id="fineAmount" placeholder="Kwota mandatu" required>
+          <button type="submit">Dodaj</button>
+        </form>
+      </div>
+      <div id="finesList"></div>
+    </section>
+
+    <section id="logout" class="section" style="display:none">
+      <div class="card">
+        <h2>Wylogowano</h2>
+        <div class="value">Dziękujemy za skorzystanie z systemu.</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function addCitizen(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const pesel = document.getElementById('pesel').value;
+      const address = document.getElementById('address').value;
+      const criminal = document.getElementById('criminal').value;
+      const citizens = JSON.parse(localStorage.getItem('citizens') || '[]');
+      citizens.push({ name, pesel, address, criminal });
+      localStorage.setItem('citizens', JSON.stringify(citizens));
+      displayCitizens();
+      e.target.reset();
+    }
+
+    function addReport(e) {
+      e.preventDefault();
+      const desc = document.getElementById('reportDesc').value;
+      const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+      reports.push({ desc, date: new Date().toLocaleDateString() });
+      localStorage.setItem('reports', JSON.stringify(reports));
+      displayReports();
+      e.target.reset();
+    }
+
+    function addFine(e) {
+      e.preventDefault();
+      const desc = document.getElementById('fineDesc').value;
+      const amount = document.getElementById('fineAmount').value;
+      const fines = JSON.parse(localStorage.getItem('fines') || '[]');
+      fines.push({ desc, amount, date: new Date().toLocaleDateString() });
+      localStorage.setItem('fines', JSON.stringify(fines));
+      displayFines();
+      e.target.reset();
+    }
+
+    function displayCitizens() {
+      const container = document.getElementById('citizenList');
+      container.innerHTML = '';
+      const citizens = JSON.parse(localStorage.getItem('citizens') || '[]');
+      citizens.forEach(citizen => {
+        container.innerHTML += `<div class="card">
+          <h2>${citizen.name}</h2>
+          <div class="label">PESEL:</div><div class="value">${citizen.pesel}</div>
+          <div class="label">Adres:</div><div class="value">${citizen.address}</div>
+          <div class="label">Rejestr Karalności:</div><div class="value">${citizen.criminal}</div>
+        </div>`;
+      });
+    }
+
+    function displayReports() {
+      const container = document.getElementById('reportsList');
+      container.innerHTML = '';
+      const reports = JSON.parse(localStorage.getItem('reports') || '[]');
+      reports.forEach(report => {
+        container.innerHTML += `<div class="card">
+          <h2>Zgłoszenie</h2>
+          <div class="label">Data:</div><div class="value">${report.date}</div>
+          <div class="label">Opis:</div><div class="value">${report.desc}</div>
+        </div>`;
+      });
+    }
+
+    function displayFines() {
+      const container = document.getElementById('finesList');
+      container.innerHTML = '';
+      const fines = JSON.parse(localStorage.getItem('fines') || '[]');
+      fines.forEach(fine => {
+        container.innerHTML += `<div class="card">
+          <h2>Mandat</h2>
+          <div class="label">Data:</div><div class="value">${fine.date}</div>
+          <div class="label">Opis:</div><div class="value">${fine.desc}</div>
+          <div class="label">Kwota:</div><div class="value">${fine.amount} zł</div>
+        </div>`;
+      });
+    }
+
+    window.onload = () => {
+      displayCitizens();
+      displayReports();
+      displayFines();
+    };
+  </script>
 </body>
 </html>
