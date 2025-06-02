@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tablet Policyjny</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0b0f1a;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1c1f2a;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #0074d9;
+    }
+    h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    nav {
+      display: flex;
+      background-color: #141820;
+      padding: 10px;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #00bfff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .content {
+      padding: 20px;
+    }
+    .card {
+      background-color: #1e2233;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+      margin-bottom: 20px;
+    }
+    .label {
+      color: #00bfff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>System Tablet Policyjny</h1>
+  </header>
+
+  <nav>
+    <a href="#">Wyszukaj obywatela</a>
+    <a href="#">Zgłoszenia</a>
+    <a href="#">Baza danych</a>
+    <a href="#">Mandaty</a>
+    <a href="#">Wyloguj</a>
+  </nav>
+
+  <div class="content">
+    <div class="card">
+      <p><span class="label">Imię i nazwisko:</span> Jan Kowalski</p>
+      <p><span class="label">PESEL:</span> 12345678901</p>
+      <p><span class="label">Wiek:</span> 34</p>
+      <p><span class="label">Wykroczenia:</span> Brak</p>
+    </div>
+
+    <div class="card">
+      <p><span class="label">Zgłoszenie #001</span></p>
+      <p><span class="label">Data:</span> 2025-06-02</p>
+      <p><span class="label">Opis:</span> Zgłoszenie hałasu na ul. Długa 12.</p>
+      <p><span class="label">Status:</span> W trakcie</p>
+    </div>
+  </div>
+</body>
+</html>
